@@ -1,13 +1,53 @@
 ## About this application
+The application goal is to demonstrate how to use maatwebsite/excel to export data from laravel application to excel file. You can export all customer records or filter them before export.
 
 ## Installation and configuration
 - Clone this repository
+```
+git clone https://github.com/mycoding-academy/laravel-export-demo.git
+```
+- Change directory to project folder
+```
+cd laravel-export-demo
+```
 - Copy .env.example to .env
-- Create database and configure your data in .env
+```
+cp .env.example .env
+```
+- Install packages
+PHP packages
+```
+composer install
+```
+Node packages
+```
+npm install
+```
+Built assest
+```
+npm run built
+```
+- Create database and use your preferred editor to configure your data in .env file.
 - Generat application key
+```
+php artisan key:generate
+```
 - Migrate database
-- Run the application
+```
+php artisan migrate
+```
+- Run the application and your application can be accessed from http://localhost:8000
+Run Vite asset builder and auto refresh page (if you change your assets)
+```
+npm run dev
+```
+Run local web server
+```
+php artisan serve
+```
+- Generate example data using seeder
 
+- Register your first user
 ## Contributing
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
