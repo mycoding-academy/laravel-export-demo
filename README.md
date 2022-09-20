@@ -45,9 +45,21 @@ Run local web server
 ```
 php artisan serve
 ```
-- Generate example data using seeder
+- Generate example data using seeder by run Customer Seeder (Only customer data) OR Database Seeder (all seeder if any).
+Run only customer seeder.
+```
+php artisan db:seed --class=CustomerSeeder
+```
+Or run all database seeder.
+```
+php artisan db:seed
+```
 
-- Register your first user
+- Register your first user using application's register link.
+- Login to the application and go to https://localhost:8000/customers and try .....
+
+I didnot add Customers menu yet so use the direct link.
+
 ## Contributing
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
