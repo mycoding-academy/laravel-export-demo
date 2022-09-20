@@ -56,9 +56,8 @@ php artisan db:seed
 ```
 
 - Register your first user using application's register link.
-- Login to the application and go to https://localhost:8000/customers and try .....
+- Login to the application and click on Customers menu and try .....
 
-I didnot add Customers menu yet so use the direct link.
 
 ## Contributing
 
