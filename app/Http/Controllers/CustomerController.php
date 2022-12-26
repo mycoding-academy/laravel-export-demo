@@ -19,12 +19,13 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $query = Customer::query();
+        /*$query = Customer::query();
         if (!empty($search)) {
             $query->where('first_name', 'LIKE', '%'.$search.'%')
                 ->orWhere('last_name', 'LIKE', '%'.$search.'%');
         }
-        $customers = $query->paginate(25);
+        */
+        $customers = Customer::search($search)->paginate(25);
         return view('customers.index', ['customers' => $customers]);
     }
 
