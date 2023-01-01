@@ -10,9 +10,10 @@ class CustomersExport implements FromQuery
 {
     use Exportable;
 
-    public function __construct($request)
+    public function __construct($search, $status)
     {
-        $this->request = $request;        
+        $this->search = $search;
+        $this->status = $status;        
     }
 
     /**
@@ -20,12 +21,17 @@ class CustomersExport implements FromQuery
     */
     public function query()
     {
-        $search = $this->request->search;
+
         $query = Customer::query();
-        if (!empty($search)) {
-            $query->where('first_name', 'LIKE', '%'.$search.'%')
-                ->orWhere('last_name', 'LIKE', '%'.$search.'%');
+        if (!empty($this->search)) {
+            $query->where('first_name', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('last_name', 'LIKE', '%'.$this->search.'%');
         }
+
+        if ($this->status != '') {
+            $query->whereIsActive($this->status);
+        }
+
         return $query;
     }
 }

@@ -4,15 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\Searchable;
 
 class Customer extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory;
 
-    protected $searchUsing = ['first_name', 'last_name'];
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
     
     public $fillable = [
         'first_name', 'last_name', 'is_active'
     ];
+
+
 }

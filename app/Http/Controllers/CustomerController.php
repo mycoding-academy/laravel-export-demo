@@ -19,14 +19,30 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        /*$query = Customer::query();
+        $status_filter = $request->status_filter;
+
+        $query = Customer::query();
+        $customerStatuses = [
+            ['id' => 1, 'name' => 'Active'],
+            ['id' => 0, 'name' => 'Not Active'],
+            ['id' => '', 'name' => 'All']
+        ];
+
         if (!empty($search)) {
             $query->where('first_name', 'LIKE', '%'.$search.'%')
                 ->orWhere('last_name', 'LIKE', '%'.$search.'%');
         }
-        */
-        $customers = Customer::search($search)->paginate(25);
-        return view('customers.index', ['customers' => $customers]);
+
+        if ($status_filter != '') {
+            $query->whereIsActive($status_filter);
+        }
+        
+        $customers = $query->paginate(25)->withQueryString();
+        
+        return view('customers.index', [
+            'customerStatuses' => $customerStatuses,
+            'customers' => $customers
+        ]);
     }
 
     /**
@@ -101,7 +117,10 @@ class CustomerController extends Controller
      */
     public function export(Request $request)
     {
-        return (new CustomersExport($request))
+        $search = $request->search;
+        $status = $request->status_filter;
+
+        return (new CustomersExport($search, $status))
             ->download('customers.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }
